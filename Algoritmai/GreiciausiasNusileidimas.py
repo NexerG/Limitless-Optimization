@@ -7,10 +7,11 @@ def GrcNusileid(funkcija, funkcijos_gradientas, x0y0):
 
 	while 1:
 		iteracijos += 1
-		grad = funkcijos_gradientas.kviesti(xy)
+		grad = funkcijos_gradientas.call(xy)
 
 		def f_(gamma):
-			return funkcija.kviesti((xy[0] + gamma * -(grad[0]), xy[1] + gamma * -(grad[1])))
+			#print(gamma)
+			return funkcija.call((xy[0] + gamma * -(grad[0]), xy[1] + gamma * -(grad[1])))
 
 		def linijos_paieska(funkcija, x, d):
 			l = 0 

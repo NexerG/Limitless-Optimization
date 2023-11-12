@@ -8,7 +8,7 @@ def GradNusileidimas(gradientas, x0y0, zingsnis):
 	while 1:
 		iteracijos += 1
 
-		z = gradientas.kviesti(xy)
+		z = gradientas.call(xy)
 		x_laikinas = xy[0] + zingsnis * z[0]
 		y_laikinas = xy[1] + zingsnis * z[1]
 		xy_laikinas = (x_laikinas, y_laikinas)

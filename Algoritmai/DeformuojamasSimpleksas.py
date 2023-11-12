@@ -1,5 +1,5 @@
 import numpy
-
+	
 def DefSimplex(funkcija, x0y0, a):
 	e = 1e-6
 	iteracijos = 0
@@ -24,10 +24,10 @@ def DefSimplex(funkcija, x0y0, a):
 		geresne = 0
 
 		for i in range(1, n + 1):
-			if funkcija.kviesti((simplexas[i][0], simplexas[i][1])) > funkcija.kviesti((simplexas[blogiausia][0], simplexas[blogiausia][1])):
+			if funkcija.call((simplexas[i][0], simplexas[i][1])) > funkcija.call((simplexas[blogiausia][0], simplexas[blogiausia][1])):
 				blogiausia = i
 
-			if funkcija.kviesti((simplexas[i][0], simplexas[i][1])) < funkcija.kviesti((simplexas[geresne][0], simplexas[geresne][1])):
+			if funkcija.call((simplexas[i][0], simplexas[i][1])) < funkcija.call((simplexas[geresne][0], simplexas[geresne][1])):
 				geresne = i
 
 		xc = numpy.zeros(n)
@@ -39,7 +39,7 @@ def DefSimplex(funkcija, x0y0, a):
 		xc /= n
 		xr = -simplexas[blogiausia] + 2 * xc
 
-		if funkcija.kviesti((xr[0], xr[1])) < funkcija.kviesti((simplexas[blogiausia][0], simplexas[blogiausia][1])):
+		if funkcija.call((xr[0], xr[1])) < funkcija.call((simplexas[blogiausia][0], simplexas[blogiausia][1])):
 			simplexas[blogiausia] = xr
 		else:
 			xc = (simplexas[blogiausia] + xc) / 2
@@ -48,17 +48,17 @@ def DefSimplex(funkcija, x0y0, a):
 				if i != blogiausia:
 					simplexas[i] = (simplexas[i] + simplexas[blogiausia]) / 2
 
-				if funkcija.kviesti((simplexas[i][0], simplexas[i][1])) < funkcija.kviesti((simplexas[geresne][0], simplexas[geresne][1])):
+				if funkcija.call((simplexas[i][0], simplexas[i][1])) < funkcija.call((simplexas[geresne][0], simplexas[geresne][1])):
 					geresne = i
 
-			if funkcija.kviesti((xr[0], xr[1])) < funkcija.kviesti((simplexas[geresne][0], simplexas[geresne][1])):
+			if funkcija.call((xr[0], xr[1])) < funkcija.call((simplexas[geresne][0], simplexas[geresne][1])):
 				simplexas[blogiausia] = xr
 			else:
 				for i in range(n + 1):
 					if i != geresne:
 						simplexas[i] = (simplexas[i] + simplexas[geresne]) / 2
 
-					if funkcija.kviesti((simplexas[i][0], simplexas[i][1])) < funkcija.kviesti((simplexas[geresne][0], simplexas[geresne][1])):
+					if funkcija.call((simplexas[i][0], simplexas[i][1])) < funkcija.call((simplexas[geresne][0], simplexas[geresne][1])):
 						geresne = i
 
 		if numpy.linalg.norm(simplexas[blogiausia] - simplexas[geresne]) < e:
